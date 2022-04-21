@@ -1,6 +1,6 @@
 const appRoutes = [
   {
-    paht: '/login',
+    path: '/login',
     name: 'Login',
     meta: {
       nameFa: 'ورود'
@@ -8,7 +8,7 @@ const appRoutes = [
     component: () => import('@/views/app/AppLogin.vue')
   },
   {
-    paht: '/register',
+    path: '/register',
     name: 'Rogin',
     meta: {
       nameFa: 'ثبت نام'
