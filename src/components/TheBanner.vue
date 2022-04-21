@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-12 pb-3">
             <div class="text-center">
-              <h2 class="title">{{ breadCrumbs.name }}</h2>
+              <h2 class="title mb-4">{{ breadCrumbs.name }}</h2>
             </div>
             <TheBreadCrumbs :items="breadCrumbs.listHrefs" />
           </div>
@@ -25,10 +25,13 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import TheBreadCrumbs from '@/components/TheBreadCrumbs.vue'
+
+const route = useRoute()
+const router = useRouter()
 
 // data
 const images = ref([
@@ -36,23 +39,33 @@ const images = ref([
   { src: 'beauty2.jpg', alt: 'image-2' },
   { src: 'beauty3.jpg', alt: 'image-3' }
 ])
-const route = useRoute()
 const breadCrumbs = ref({
   name: '',
-  listHrefs: [
-    { text: 'خانه', href: '/', disabled: false },
-    { text: 'محصولات', href: '/product', disabled: true }
-  ]
-})
-// hooks
-onMounted(() => {
-  breadCrumbs.value.name = route.meta.nameFa
+  listHrefs: []
 })
 
 // methods
 const getImg = (img) => {
   return require(`../assets/styles/images/${img}`)
 }
+
+const getRouteForBreadCrumb = (fullPath) => {
+  breadCrumbs.value.listHrefs = [{ text: 'خانه', href: '/', disabled: false }]
+  const routes = fullPath.split('/')
+  routes.forEach(element => {
+    if (element.length > 2) {
+      const itemBreadCrumb = router.getRoutes().find((item) => item.path.includes(element))
+      breadCrumbs.value.listHrefs.push({ text: itemBreadCrumb.meta.nameFa, href: itemBreadCrumb.path, disabled: false })
+    }
+  })
+}
+
+// watch
+watch(route, ({ fullPath }) => {
+  breadCrumbs.value.name = route.meta.nameFa
+  getRouteForBreadCrumb(fullPath)
+}, { deep: true, immediate: true })
+
 </script>
 
 <style scoped>
