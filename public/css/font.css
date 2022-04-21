@@ -14,3 +14,19 @@
   font-family: "Vazir-Thin";
   src: url("../fonts/Vazir-Thin.ttf");
 }
+@font-face {
+  font-family: "Iran-Sans-Bold";
+  src: url("../fonts/Iran-Sans-Bold.ttf");
+}
+@font-face {
+  font-family: "Iran-Sans-Medium";
+  src: url("../fonts/Iran-Sans-Medium.ttf");
+}
+@font-face {
+  font-family: "Iran-Sans-Regular";
+  src: url("../fonts/Iran-Sans-Regular.ttf");
+}
+@font-face {
+  font-family: "Aparat";
+  src: url("../fonts/Aparat.ttf");
+}

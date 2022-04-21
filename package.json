@@ -11,8 +11,10 @@
     "bootstrap": "^5.1.3",
     "core-js": "^3.8.3",
     "font-awesome": "^4.7.0",
+    "swiper": "^8.1.3",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
+    "vue-social-sharing": "^4.0.0-alpha4",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

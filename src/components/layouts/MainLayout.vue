@@ -2,6 +2,9 @@
   <div>
     <TheNavbar />
     <TheBanner />
+    <div class="container-fluid py-5">
+      <slot></slot>
+    </div>
     <TheFooter />
   </div>
 </template>

@@ -1,11 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import DashboardView from '../views/DashboardView.vue'
+import appRoutes from './app'
+import dashboardRoutes from './dashboard'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Home',
+    meta: { nameFa: 'خانه' },
+    component: HomeView,
+    children: [...appRoutes]
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    meta: { nameFa: 'پنل مدیریت' },
+    component: DashboardView,
+    children: [...dashboardRoutes]
   }
 ]
 

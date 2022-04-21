@@ -2,7 +2,6 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Vazir";
   font-size: 16px;
   box-sizing: border-box;
   direction: rtl;
@@ -11,5 +10,5 @@ i {
   color: #eb3e32;
 }
 * {
-  font-family: "Vazir";
+  font-family: "Iran-Sans-Medium";
 }

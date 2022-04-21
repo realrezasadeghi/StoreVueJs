@@ -82,7 +82,7 @@
             <div class="header-align">
               <div class="header-navigation-area position-relative">
                 <ul class="main-menu nav">
-                  <li class="mx-2">صفحه اصلی</li>
+                  <li class="mx-2">خانه</li>
                   <li class="mx-2">محصولات</li>
                   <li class="mx-2">درباره ما</li>
                   <li class="mx-2">ارتباط با ما</li>
@@ -136,7 +136,7 @@
   text-decoration: none;
   font-size: 30px;
   color: black;
-  font-family: "Vazir-Bold";
+  font-family: "Iran-Sans-Bold";
 }
 
 .header-searchbox {
@@ -171,6 +171,11 @@
   left: 0;
   top: 0;
   width: 65px;
+  -moz-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.header-searchbox .btn-submit:hover{
+  background-color: #333131;
 }
 .header-searchbox .btn-submit i {
   color: white;
