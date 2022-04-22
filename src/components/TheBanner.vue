@@ -1,9 +1,9 @@
 <template>
   <main class="main-content">
-    <section  v-if="$route.path === '/'" class="main-slider-home">
+    <section  v-if="$route.name === 'Home'" class="main-slider-home">
       <Swiper :slides-per-view="1" :space-between="50" :pagination="true">
         <SwiperSlide v-for="(image, index) in images" :key="index">
-          <router-link :to="`/product/${image.alt}`">
+          <router-link :to="`/product/${image.alt}`" class="h-100 w-100">
             <img :src="getImg(image.src)" :alt="image.alt" />
           </router-link>
         </SwiperSlide>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <TheNavbar />
     <TheBanner />
     <div class="container-fluid py-5">

@@ -23,6 +23,9 @@
       </div>
     </div>
 
+    <!-- header responsive for mobile -->
+    <TheNavbarResponsive v-if="showNavbar" @close="showNavbar = !showNavbar"/>
+
     <!-- header middle  -->
     <div class="header-middle">
       <div class="container py-0">
@@ -50,19 +53,26 @@
               </div>
               <div class="header-middle-align-end">
                 <div class="header-action-area">
-                  <div class="shopping-wishlist">
-                    <button class="shopping-wishlist-btn btn">
-                      <i class="fa fa-heart-o"></i>
+                  <div class="shopping-navbar">
+                    <button class="shopping-navbar-btn btn shopping-icon-hover" @click="showNavbar=!showNavbar">
+                      <i class="fa fa-bars" />
                     </button>
                   </div>
-                  <div class="shopping-cart">
+                  <div class="shopping-search">
+                    <button class="shopping-search-btn btn shopping-icon-hover">
+                      <i class="fa fa-search" />
+                    </button>
+                  </div>
+                  <div class="shopping-wishlist">
                     <button
-                      class="shopping-cart-btn"
-                      data-bs-toggle="offcanvas"
-                      data-bs-target="#AsideOffcanvasCart"
-                      aria-controls="offcanvasRightLabel"
+                      class="shopping-wishlist-btn btn shopping-icon-hover"
                     >
-                      <i class="fa fa-shopping-basket"></i>
+                      <i class="fa fa-heart-o" />
+                    </button>
+                  </div>
+                  <div class="shopping-cart shopping-icon-hover">
+                    <button class="shopping-cart-btn">
+                      <i class="fa fa-shopping-basket" />
                       <sup></sup>
                     </button>
                   </div>
@@ -86,7 +96,7 @@
                   <li class="mx-2">محصولات</li>
                   <li class="mx-2">درباره ما</li>
                   <li class="mx-2">ارتباط با ما</li>
-                  <li class="mx-2">تخفیف ها </li>
+                  <li class="mx-2">تخفیف ها</li>
                 </ul>
               </div>
             </div>
@@ -97,7 +107,12 @@
   </header>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import TheNavbarResponsive from '@/components/TheNavbarResponsive.vue'
+// state
+const showNavbar = ref(false)
+</script>
 
 <style scoped>
 .header-top {
@@ -174,7 +189,7 @@
   -moz-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-.header-searchbox .btn-submit:hover{
+.header-searchbox .btn-submit:hover {
   background-color: #333131;
 }
 .header-searchbox .btn-submit i {
@@ -206,9 +221,15 @@
   padding: 0 6px 0 0;
 }
 .shopping-wishlist-btn i,
+.shopping-navbar-btn i,
+.shopping-search-btn i,
 .shopping-cart-btn i {
   color: #252525;
   font-weight: 200;
+  transition: 0.15s ease-out;
+}
+.shopping-icon-hover i:hover {
+  color: #eb3e32;
 }
 
 /* header */
@@ -253,5 +274,27 @@
 .nav li:hover {
   color: #fffc;
   transition: 0.2s ease-in-out;
+}
+
+/* responsive */
+@media screen and (max-width: 991px) {
+  .header-middle-align-center,
+  .header-default,
+  .header-top-align-end {
+    display: none;
+  }
+  .header-top-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 575px) {
+  .header-middle {
+    padding: 20px 0;
+  }
+  .header-middle .row {
+    padding: 15px;
+  }
 }
 </style>
