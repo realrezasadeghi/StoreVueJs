@@ -6,35 +6,64 @@
           <div class="section-title m-auto text-center">
             <h2 class="title">ورود</h2>
           </div>
+          <div class="section-text m-auto text-center">
+            <p>سلام خوش اومدی !</p>
+          </div>
         </div>
       </div>
-      <div class="row justify-content-center align-items-center">
+      <div
+        v-if="loginStepOne"
+        class="row justify-content-center align-items-center"
+      >
         <div class="form-login">
           <form>
             <div class="row">
               <div class="col-12 p-0">
-                <TheTextField v-model="value" label="نام کاربری یا ایمیل" />
+                <TheTextField
+                  v-model="formLogin.mobile"
+                  label="شماره تلفن همراه تو وارد کن"
+                />
               </div>
               <div class="col-12 p-0">
-                <TheTextField v-model="value" label="رمز عبور" />
-              </div>
-              <div class="col-12 p-0">
-                <TheButton label="ورود" />
+                <TheButton label="ورود" type="submit"/>
               </div>
             </div>
           </form>
         </div>
       </div>
+      <Suspense>
+        <template v-if="!loginStepOne" #default>
+          <div class="row justify-content-center align-content-center">
+            <div class="form-login">
+              <form>
+                <div class="row">
+                  <div class="col-12 p-0">
+                    <TheTextField
+                      v-model="formLogin.code"
+                      label="کد ارسال شده رو وارد کن"
+                    />
+                  </div>
+                  <div class="col-12 p-0">
+                    <TheButton label="ارسال کد" type="submit" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </template>
+        <template #fallback> Loading... </template>
+      </Suspense>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-const value = ref('')
-watch(value, (val) => {
-  console.log(val)
+import { reactive, ref } from 'vue'
+const formLogin = reactive({
+  mobile: '',
+  code: ''
 })
+const loginStepOne = ref(false)
 </script>
 
 <style scoped>

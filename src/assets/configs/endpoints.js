@@ -4,9 +4,12 @@ const endpoints = {
     actions: {
       GetOtp: {
         name: 'GetOtp',
-        path: 'todos/1',
+        path: 'todos/{id}',
+        params: '{id:int},{name:string}',
         method: 'get',
-        enableMessage: true
+        enableMessage: true,
+        cacheTime: 60,
+        varyByParam: true
       }
     }
   }

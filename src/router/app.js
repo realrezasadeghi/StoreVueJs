@@ -6,14 +6,6 @@ const appRoutes = [
       nameFa: 'ورود'
     },
     component: () => import('@/views/app/AppLogin.vue')
-  },
-  {
-    path: '/register',
-    name: 'Rogin',
-    meta: {
-      nameFa: 'ثبت نام'
-    },
-    component: () => import('@/views/app/AppRegister.vue')
   }
 ]
 

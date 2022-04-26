@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-custom">{{ label }}</button>
+  <button class="btn btn-custom" :type="type">{{ label }}</button>
 </template>
 
 <script setup>
@@ -9,6 +9,10 @@ defineProps({
     type: String,
     default: '',
     required: true
+  },
+  type: {
+    type: String,
+    default: 'button'
   }
 })
 </script>
@@ -33,5 +37,6 @@ defineProps({
 .btn-custom:hover{
 background-color: #eb3e32;
 border-color: #eb3e32;
+color: white;
 }
 </style>
