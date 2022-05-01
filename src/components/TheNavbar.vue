@@ -11,9 +11,17 @@
               </div>
               <div class="header-top-align-end">
                 <ul class="header-info-items">
-                  <li class="account">
+                  <li v-if="!authenticated" class="account">
                     <i class="fa fa-user" />
-                    حساب کاربری
+                    <router-link to="/login" class="header-info-account"
+                      >حساب کاربری</router-link
+                    >
+                  </li>
+                  <li v-else>
+                    <i class="fa fa-user" />
+                    <router-link to="/panel-user" class="header-info-account">{{
+                      userInformation.mobile
+                    }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -24,7 +32,7 @@
     </div>
 
     <!-- header responsive for mobile -->
-    <TheNavbarResponsive v-if="showNavbar" @close="showNavbar = !showNavbar"/>
+    <TheNavbarResponsive v-if="showNavbar" @close="showNavbar = !showNavbar" />
 
     <!-- header middle  -->
     <div class="header-middle">
@@ -54,7 +62,10 @@
               <div class="header-middle-align-end">
                 <div class="header-action-area">
                   <div class="shopping-navbar">
-                    <button class="shopping-navbar-btn btn shopping-icon-hover" @click="showNavbar=!showNavbar">
+                    <button
+                      class="shopping-navbar-btn btn shopping-icon-hover"
+                      @click="showNavbar = !showNavbar"
+                    >
                       <i class="fa fa-bars" />
                     </button>
                   </div>
@@ -110,8 +121,11 @@
 <script setup>
 import { ref } from 'vue'
 import TheNavbarResponsive from '@/components/TheNavbarResponsive.vue'
+import { useAuthStore } from '@/store/auth'
+import { storeToRefs } from 'pinia'
 // state
 const showNavbar = ref(false)
+const { userInformation, authenticated } = storeToRefs(useAuthStore())
 </script>
 
 <style scoped>
@@ -133,6 +147,16 @@ const showNavbar = ref(false)
   display: flex;
   list-style: none;
   margin: 0;
+}
+.header-info-items .header-info-account {
+  color: black;
+  text-decoration: none;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: 0.3 ease-in-out !important;
+}
+.header-info-items .header-info-account:hover {
+  color: #eb3e32;
 }
 .header-middle {
   padding: 27px 30px 26px 30px;

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useFetch } from '@/services/useFetch'
+import decodeToken from '@/utils/jwtDecode'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -15,13 +16,17 @@ export const useAuthStore = defineStore('auth', {
     }
   },
   actions: {
-    async checkValidate (code) {
+    async checkOtp (payload) {
       try {
-        const res = await useFetch('User.CheckOtp', { code })
-        this.token = res.data
+        const { response } = await useFetch('User.CheckOtp', { ...payload })
+        this.token = response.data.accessToken
+        this.setUser()
       } catch (error) {
         return error
       }
+    },
+    setUser () {
+      this.user = decodeToken(this.token)
     }
   }
 })

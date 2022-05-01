@@ -19,7 +19,7 @@
                   موجود تمرکز کنند.
                 </p>
                 <div class="socail-share">
-                  <TheSharing />
+                  <TheSharing :sharing="sharing" />
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import TheSharing from '@/components/TheSharing.vue'
 
 // state
@@ -95,6 +95,12 @@ const columnsFooter = ref([
     ]
   }
 ])
+
+const sharing = reactive({
+  url: 'https://news.vuejs.org/issues/180',
+  title: 'Say hi to Vite! A brand new, extremely fast development setup for Vue.',
+  description: 'his week, I’d like to introduce you to "Vite", which means "Fast".'
+})
 </script>
 
 <style scoped>
@@ -139,7 +145,7 @@ footer {
 .nav-menu .footer-link:hover {
   color: #eb3e32;
 }
-.footer-main .widget-collapse-body{
+.footer-main .widget-collapse-body {
   display: block;
 }
 
@@ -163,7 +169,7 @@ footer {
     color: #fff;
     font-weight: 500;
   }
-  .footer-main .widget-title{
+  .footer-main .widget-title {
     margin-bottom: 0;
   }
   .widget-collapse-body {
@@ -171,10 +177,10 @@ footer {
     border: 1px solid #36393f;
     transition: all 0.3s ease-out;
   }
-  .collapse-body{
+  .collapse-body {
     padding: 27px 25px 0;
   }
-  .nav-menu .footer-link{
+  .nav-menu .footer-link {
     font-family: "Iran-Sans-Regular";
     font-weight: 300;
   }

@@ -11,59 +11,90 @@
           </div>
         </div>
       </div>
-      <div
-        v-if="loginStepOne"
-        class="row justify-content-center align-items-center"
-      >
-        <div class="form-login">
-          <form>
-            <div class="row">
-              <div class="col-12 p-0">
-                <TheTextField
-                  v-model="formLogin.mobile"
-                  label="شماره تلفن همراه تو وارد کن"
-                />
-              </div>
-              <div class="col-12 p-0">
-                <TheButton label="ورود" type="submit"/>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <Suspense>
-        <template v-if="!loginStepOne" #default>
-          <div class="row justify-content-center align-content-center">
-            <div class="form-login">
-              <form>
-                <div class="row">
-                  <div class="col-12 p-0">
-                    <TheTextField
-                      v-model="formLogin.code"
-                      label="کد ارسال شده رو وارد کن"
-                    />
-                  </div>
-                  <div class="col-12 p-0">
-                    <TheButton label="ارسال کد" type="submit" />
-                  </div>
+      <template v-if="!showLoading">
+        <div
+          v-if="loginStepOne"
+          class="row justify-content-center align-items-center"
+        >
+          <div class="form-login">
+            <form>
+              <div class="row">
+                <div class="col-12 p-0">
+                  <TheTextField
+                    v-model="formLogin.mobile"
+                    label="شماره تلفن همراه تو وارد کن"
+                  />
                 </div>
-              </form>
-            </div>
+                <div class="col-12 p-0">
+                  <TheButton
+                    label="ورود"
+                    type="submit"
+                    @click.prevent="getOtp"
+                  />
+                </div>
+              </div>
+            </form>
           </div>
-        </template>
-        <template #fallback> Loading... </template>
-      </Suspense>
+        </div>
+        <div
+          v-else-if="!loginStepOne"
+          class="row justify-content-center align-content-center"
+        >
+          <div class="form-login">
+            <form>
+              <div class="row">
+                <div class="col-12 p-0">
+                  <TheTextField
+                    v-model="formLogin.code"
+                    label="کد ارسال شده رو وارد کن"
+                  />
+                </div>
+                <div class="col-12 p-0">
+                  <TheButton
+                    label="ارسال کد"
+                    type="submit"
+                    @click.prevent="checkOtp"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </template>
+      <div v-else  class="row justify-content-center align-items-center">
+         <BaseLoading/>
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import { useFetch } from '@/services/useFetch'
 import { reactive, ref } from 'vue'
+import { useAuthStore } from '@/store/auth'
 const formLogin = reactive({
   mobile: '',
   code: ''
 })
-const loginStepOne = ref(false)
+const loginStepOne = ref(true)
+const showLoading = ref(false)
+// eslint-disable-next-line no-unused-vars
+const store = useAuthStore()
+// methods
+const getOtp = async () => {
+  showLoading.value = true
+  try {
+    await useFetch('User.GetOtp', { mobile: formLogin.mobile })
+    loginStepOne.value = false
+  } catch (error) {
+    console.log(error)
+  } finally {
+    showLoading.value = false
+  }
+}
+const checkOtp = () => {
+  store.checkOtp(formLogin)
+}
 </script>
 
 <style scoped>

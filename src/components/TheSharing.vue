@@ -23,23 +23,9 @@ defineProps({
     type: Object,
     required: true,
     default: () => ({
-      url: {
-        type: String,
-        default: 'https://news.vuejs.org/issues/180',
-        required: true
-      },
-      title: {
-        type: String,
-        default:
-          'Say hi to Vite! A brand new, extremely fast development setup for Vue.',
-        required: true
-      },
-      description: {
-        type: String,
-        default:
-          'his week, I’d like to introduce you to "Vite", which means "Fast".',
-        required: false
-      }
+      url: '',
+      title: '',
+      description: ''
     })
   },
   showNameSocail: {
